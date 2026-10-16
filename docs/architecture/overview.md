@@ -2,7 +2,7 @@
 
 ## Recommendation
 
-Start with a static-first web application: Next.js, React, and TypeScript, with content held in version-controlled MDX/data modules. Tailwind CSS is a pragmatic styling candidate, subject to implementation-time confirmation. This is documented in [ADR 0001](decisions/0001-static-first-portfolio.md).
+The implemented foundation is a static-first web application using Next.js, React, TypeScript, and Tailwind CSS. Content remains in version-controlled data/modules as the project evolves. This direction is documented in [ADR 0001](decisions/0001-static-first-portfolio.md) and confirmed by [ADR 0002](decisions/0002-confirm-mvp-frontend-stack.md).
 
 ## Why this shape
 
@@ -15,9 +15,13 @@ The MVP is content-led and does not justify a backend, database, cache, monorepo
 - Future Architecture Lab: isolated interactive client components; consider React Flow only when diagram requirements validate it.
 - Future services: evaluate a backend, database, CMS, analytics, or AI capability only against an approved use case, privacy/security needs, and ongoing operating cost.
 
+## Static hosting
+
+The portfolio exports static assets to `out/` and includes a GitHub Actions workflow for GitHub Pages. See [ADR 0003](decisions/0003-github-pages-static-deployment.md). This configuration is local-only until the owner commits, pushes, and enables GitHub Actions as the repository's Pages source.
+
 ## Deferred technology
 
-NestJS, PostgreSQL, Redis, Nx, AWS-specific services, Kubernetes, and a separate API are not part of the MVP architecture. React Flow, MDX, and Tailwind are candidates, not installed dependencies.
+NestJS, PostgreSQL, Redis, Nx, AWS-specific services, Kubernetes, and a separate API are not part of the MVP architecture. React Flow and MDX are candidates, not installed dependencies. Tailwind CSS is installed as part of the application foundation.
 
 ## Quality attributes
 

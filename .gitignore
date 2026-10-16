@@ -6,9 +6,13 @@
 # Future application artifacts
 node_modules/
 .next/
+out/
 coverage/
 dist/
 *.log
 .env
 .env.*
 !.env.example
+
+# TypeScript and Next.js generated files
+*.tsbuildinfo

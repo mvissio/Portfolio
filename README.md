@@ -4,7 +4,7 @@ A bilingual (English-first, Spanish) professional portfolio for Marcos Vissio, S
 
 ## Status
 
-Phase 0 is complete: the repository contains product, architecture, engineering, and agent-continuity documentation only. No application code or dependencies have been added.
+Phase 0 is complete and the application foundation is in place: Next.js, React, TypeScript, Tailwind CSS, English (`/`) and Spanish (`/es`) static routes, plus the product and continuity documentation. Public professional content is intentionally pending owner approval.
 
 ## Product direction
 

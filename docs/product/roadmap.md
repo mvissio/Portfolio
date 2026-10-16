@@ -4,7 +4,7 @@
 
 Repository conventions, persistent context, product direction, MVP boundary, proposed architecture, and initial ADR.
 
-## Milestone 1 — MVP definition and content readiness (next; approval required)
+## Milestone 1 — MVP definition and content readiness (in progress)
 
 **Objective:** turn the MVP into an implementable, evidence-backed plan.
 
@@ -12,9 +12,9 @@ Repository conventions, persistent context, product direction, MVP boundary, pro
 
 **Acceptance criteria:** owner has approved publishable claims and contact/resume inputs; route/content inventory and MVP acceptance criteria are documented; unresolved decisions are explicit.
 
-## Milestone 2 — Application foundation (requires Milestone 1 approval)
+## Milestone 2 — Application foundation (in progress; authorized before Milestone 1 content closure)
 
-Initialize the approved frontend, bilingual routing/content foundation, design primitives, quality tooling, and a minimal accessible shell.
+Initialize the approved frontend, bilingual routing/content foundation, design primitives, quality tooling, and a minimal accessible shell. The technical foundation is complete; replacing safe placeholder copy with publishable professional content remains dependent on Milestone 1 inputs.
 
 ## Milestone 3 — MVP portfolio (requires Milestone 2 approval)
 
