@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import SpanishHome from "./page";
 
@@ -7,9 +7,9 @@ describe("Spanish home page", () => {
     render(<SpanishHome />);
 
     expect(
-      screen.getByRole("heading", { name: /construyo caminos claros en\s*sistemas complejos/i }),
+      screen.getByRole("heading", { name: /transformo presión de producto en\s*sistemas que los equipos pueden entregar/i }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/la experiencia profesional y los casos de estudio/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Simulador de trade-offs de arquitectura" })).toBeInTheDocument();
   });
 
   it("links to the English route", () => {
@@ -18,7 +18,7 @@ describe("Spanish home page", () => {
     expect(screen.getByRole("link", { name: "EN" })).toHaveAttribute("href", "/");
   });
 
-  it("keeps the three translated pillars visible", () => {
+  it("keeps the three translated areas of practice visible", () => {
     render(<SpanishHome />);
 
     expect(screen.getByRole("heading", { name: "Construir" })).toBeInTheDocument();
@@ -26,11 +26,21 @@ describe("Spanish home page", () => {
     expect(screen.getByRole("heading", { name: "Liderar" })).toBeInTheDocument();
   });
 
-  it("shows the translated technical-focus groups", () => {
+  it("renders the public-safe functional lab", () => {
     render(<SpanishHome />);
 
-    expect(screen.getByRole("heading", { name: "Ingeniería web" })).toBeInTheDocument();
-    expect(screen.getByText("TypeScript")).toBeInTheDocument();
-    expect(screen.getByText("Sistemas distribuidos")).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "Lanzamiento de producto" })).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    expect(screen.getByText("Flujo del sistema")).toBeInTheDocument();
+  });
+
+  it("renders the portfolio map in Spanish", () => {
+    render(<SpanishHome />);
+
+    fireEvent.click(screen.getByRole("button", { name: "Patrones AWS" }));
+
+    expect(screen.getByRole("heading", { name: "Explicar la nube mediante decisiones." })).toBeInTheDocument();
   });
 });

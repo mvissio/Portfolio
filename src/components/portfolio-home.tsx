@@ -1,4 +1,7 @@
 import Link from "next/link";
+
+import { ArchitectureLab } from "./architecture-lab";
+import { PortfolioMap } from "./portfolio-map";
 import { portfolioContent, type PortfolioLocale } from "../content/portfolio";
 
 type PortfolioHomeProps = {
@@ -8,103 +11,130 @@ type PortfolioHomeProps = {
 export function PortfolioHome({ locale }: PortfolioHomeProps) {
   const content = portfolioContent[locale];
   const isSpanish = locale === "es";
-  const ids = isSpanish
-    ? { top: "inicio", approach: "enfoque", foundation: "base", focus: "enfoque-profesional" }
-    : { top: "top", approach: "approach", foundation: "foundation", focus: "professional-focus" };
-  const labels = isSpanish
-    ? { nav: "Navegación principal", home: "Inicio de Marcos Vissio", approach: "Enfoque", foundation: "Perfil" }
-    : { nav: "Primary navigation", home: "Marcos Vissio home", approach: "Approach", foundation: "Profile" };
+  const alternateLocale = isSpanish ? "EN" : "ES";
+  const alternateHref = isSpanish ? "/" : "/es";
 
   return (
     <main>
-      <nav className="nav shell" aria-label={labels.nav}>
-        <a className="wordmark" href={`#${ids.top}`} aria-label={labels.home}>
-          MV<span>.</span>
+      <div className="availability-bar">
+        <div className="shell availability-content">
+          <span aria-hidden="true" className="status-dot" />
+          <p>{content.availability}</p>
+        </div>
+      </div>
+
+      <nav aria-label="Primary navigation" className="shell site-nav">
+        <a aria-label="Marcos Vissio" className="wordmark" href="#top">
+          M<span>/</span>V
         </a>
         <div className="nav-links">
-          <a href={`#${ids.approach}`}>{labels.approach}</a>
-          <a href={`#${ids.foundation}`}>{labels.foundation}</a>
-          <Link className="language" href={isSpanish ? "/" : "/es"} lang={isSpanish ? "en" : "es"}>
-            {isSpanish ? "EN" : "ES"}
-          </Link>
+          <a href="#work">{content.nav.work}</a>
+          <a href="#lab">{content.nav.lab}</a>
+          <a href="#practice">{content.nav.practice}</a>
         </div>
+        <Link className="locale-link" href={alternateHref} lang={alternateLocale.toLowerCase()}>
+          {alternateLocale}
+        </Link>
       </nav>
 
-      <section className="hero shell" id={ids.top} aria-labelledby="hero-title">
-        <div className="eyebrow"><span /> {content.heroEyebrow}</div>
-        <p className="positioning">{content.positioning}</p>
-        <div className="hero-grid">
-          <h1 id="hero-title">{content.heroTitle}<br /><em>{content.heroEmphasis}</em></h1>
-          <div className="hero-side">
-            <p>{content.intro}</p>
-            <a className="text-link" href={`#${ids.approach}`}>{content.exploreLabel} <span aria-hidden="true">↘</span></a>
+      <section className="hero shell" id="top">
+        <div className="hero-copy">
+          <p className="eyebrow">{content.hero.kicker}</p>
+          <h1>
+            {content.hero.title} <em>{content.hero.emphasis}</em>
+          </h1>
+          <p className="hero-body">{content.hero.body}</p>
+          <div className="hero-actions">
+            <a className="button button-primary" href="#work">
+              {content.hero.primaryCta}
+              <span aria-hidden="true">↘</span>
+            </a>
+            <a className="button button-secondary" href="#lab">
+              {content.hero.secondaryCta}
+            </a>
           </div>
         </div>
-        <div className="hero-footer">
-          <p>{content.integrityNote}</p>
-          <span className="scroll-mark" aria-hidden="true">↓</span>
-        </div>
-      </section>
 
-      <section className="pillars" id={ids.approach} aria-labelledby="approach-title">
-        <div className="shell section-heading">
-          <p className="eyebrow"><span /> {content.approachEyebrow}</p>
-          <h2 id="approach-title">{content.approachTitle}</h2>
-        </div>
-        <div className="pillar-list shell">
-          {content.pillars.map((pillar) => (
-            <article className="pillar" key={pillar.number}>
-              <span className="pillar-number">{pillar.number}</span>
-              <h3>{pillar.title}</h3>
-              <p>{pillar.description}</p>
-              <span className="pillar-arrow" aria-hidden="true">↗</span>
-            </article>
+        <PortfolioMap content={content.map} />
+
+        <ul className="proof-list">
+          {content.hero.proof.map((item, index) => (
+            <li key={item}>
+              <span>0{index + 1}</span>
+              {item}
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
 
-      <section className="foundation shell" id={ids.foundation} aria-labelledby="foundation-title">
-        <div className="foundation-card">
-          <p className="eyebrow"><span /> {content.foundationEyebrow}</p>
-          <div className="foundation-content">
-            <h2 id="foundation-title">{content.foundationTitle}<br />{content.foundationEmphasis}</h2>
-            <div>
-              <p>{content.foundationBody}</p>
-              <a className="button" href={`#${ids.focus}`}>{content.nextLabel} <span aria-hidden="true">→</span></a>
-            </div>
+      <section className="work-section" id="work">
+        <div className="shell">
+          <div className="section-heading">
+            <p className="eyebrow">{content.work.eyebrow}</p>
+            <h2>{content.work.title}</h2>
+            <p>{content.work.note}</p>
           </div>
-        </div>
-      </section>
 
-      <section className="capabilities shell" aria-labelledby="capabilities-title">
-        <p className="eyebrow"><span /> {content.capabilitiesEyebrow}</p>
-        <h2 id="capabilities-title">{content.capabilitiesTitle}</h2>
-        <div className="capability-grid">
-          {content.capabilityGroups.map((group) => (
-            <article className="capability-group" key={group.title}>
-              <h3>{group.title}</h3>
-              <ul>
-                {group.items.map((item) => <li key={item}>{item}</li>)}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="next shell" id={ids.focus} aria-labelledby="focus-title">
-        <p className="eyebrow"><span /> {content.focusEyebrow}</p>
-        <div className="next-grid">
-          <h2 id="focus-title">{content.focusTitle}</h2>
-          <ol>
-            {content.focusAreas.map((area, index) => (
-              <li key={area}><strong>{String(index + 1).padStart(2, "0")}</strong><span>{area}</span></li>
+          <div className="project-grid">
+            {content.work.projects.map((project, index) => (
+              <article className={`project-card project-${index + 1}`} key={project.title}>
+                <div className="project-card-topline">
+                  <span>{project.number}</span>
+                  <span>{project.status}</span>
+                </div>
+                <div className="project-card-body">
+                  <h3>{project.title}</h3>
+                  <p>{project.description}</p>
+                  <p className="project-outcome">{project.outcome}</p>
+                </div>
+                <div className="project-card-footer">
+                  <ul aria-label={`${project.title} technologies`}>
+                    {project.tags.map((tag) => (
+                      <li key={tag}>{tag}</li>
+                    ))}
+                  </ul>
+                  {project.number === "01" ? (
+                    <a href="#lab">{content.hero.secondaryCta} <span aria-hidden="true">↘</span></a>
+                  ) : (
+                    <span>{content.closing.contactLabel}</span>
+                  )}
+                </div>
+              </article>
             ))}
-          </ol>
+          </div>
         </div>
       </section>
 
-      <footer className="footer shell">
-        <span>MARCOS VISSIO</span>
+      <ArchitectureLab content={content.lab} />
+
+      <section className="practice-section" id="practice">
+        <div className="shell practice-layout">
+          <div className="section-heading">
+            <p className="eyebrow">{content.practice.eyebrow}</p>
+            <h2>{content.practice.title}</h2>
+          </div>
+          <div className="practice-list">
+            {content.practice.practices.map((item, index) => (
+              <article key={item.title}>
+                <span>0{index + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="closing-section">
+        <div className="shell closing-layout">
+          <p className="eyebrow">{content.practice.eyebrow}</p>
+          <h2>{content.closing.title}</h2>
+          <p>{content.closing.body}</p>
+        </div>
+      </section>
+
+      <footer className="shell site-footer">
+        <span>© {new Date().getFullYear()} Marcos Vissio</span>
         <span>{content.footer}</span>
       </footer>
     </main>

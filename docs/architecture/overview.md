@@ -12,7 +12,7 @@ The MVP is content-led and does not justify a backend, database, cache, monorepo
 
 - UI: accessible components, responsive layouts, bilingual presentation.
 - Content: English and Spanish source content plus explicit verification metadata where required.
-- Future Architecture Lab: isolated interactive client components; consider React Flow only when diagram requirements validate it.
+- Interactive architecture: isolated client components render the Architecture Trade-off Simulator and an accessible Portfolio Map. The map is code-native, keyboard-operable, bilingual, and does not require a diagram dependency. Consider React Flow only if a future application needs free-form graph manipulation.
 - Future services: evaluate a backend, database, CMS, analytics, or AI capability only against an approved use case, privacy/security needs, and ongoing operating cost.
 
 ## Static hosting

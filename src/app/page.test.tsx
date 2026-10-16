@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import Home from "./page";
 
@@ -7,9 +7,9 @@ describe("English home page", () => {
     render(<Home />);
 
     expect(
-      screen.getByRole("heading", { name: /i build clear paths through\s*complex systems/i }),
+      screen.getByRole("heading", { name: /i turn product pressure into\s*systems teams can ship/i }),
     ).toBeInTheDocument();
-    expect(screen.getByText(/professional experience and case studies/i)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Architecture Trade-off Simulator" })).toBeInTheDocument();
   });
 
   it("links to the Spanish route", () => {
@@ -18,7 +18,7 @@ describe("English home page", () => {
     expect(screen.getByRole("link", { name: "ES" })).toHaveAttribute("href", "/es");
   });
 
-  it("keeps the three professional pillars visible", () => {
+  it("keeps the three areas of practice visible", () => {
     render(<Home />);
 
     expect(screen.getByRole("heading", { name: "Build" })).toBeInTheDocument();
@@ -26,11 +26,21 @@ describe("English home page", () => {
     expect(screen.getByRole("heading", { name: "Lead" })).toBeInTheDocument();
   });
 
-  it("shows the technical-focus groups", () => {
+  it("lets visitors inspect a different architecture scenario", () => {
     render(<Home />);
 
-    expect(screen.getByRole("heading", { name: "Web engineering" })).toBeInTheDocument();
-    expect(screen.getByText("TypeScript")).toBeInTheDocument();
-    expect(screen.getByText("Distributed systems")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "Demand spike" }));
+
+    expect(screen.getByRole("button", { name: "Demand spike" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByText("Protect the transaction; absorb the burst.")).toBeInTheDocument();
+  });
+
+  it("lets visitors explore the portfolio architecture map", () => {
+    render(<Home />);
+
+    fireEvent.click(screen.getByRole("button", { name: "AWS patterns" }));
+
+    expect(screen.getByRole("button", { name: "AWS patterns" })).toHaveAttribute("aria-pressed", "true");
+    expect(screen.getByRole("heading", { name: "Explain the cloud through decisions." })).toBeInTheDocument();
   });
 });
