@@ -1,0 +1,14 @@
+# OS and editor metadata
+.DS_Store
+.idea/
+*.iml
+
+# Future application artifacts
+node_modules/
+.next/
+coverage/
+dist/
+*.log
+.env
+.env.*
+!.env.example
